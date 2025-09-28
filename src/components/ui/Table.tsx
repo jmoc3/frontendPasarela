@@ -38,7 +38,11 @@ export const TableFacturas: FC<TableFacturasProps> = ({ headers, records }) => {
         <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
           <tr className="text-center">
             {headers.map((element, index) => (
-              <th key={index} scope="col" className="px-6 py-3">
+              <th
+                key={index}
+                scope="col"
+                className={`px-6 py-3 ${element == 'Fecha de vencimiento de tarjeta' && 'w-[10rem]'} ${element == 'Codigo de seguridad de tarjeta' && 'w-[10rem]'} ${element == 'Monto' && 'w-[10rem]'} ${element == 'Descripcion' && 'w-[15rem]'}`}
+              >
                 {element}
               </th>
             ))}
@@ -51,18 +55,18 @@ export const TableFacturas: FC<TableFacturasProps> = ({ headers, records }) => {
                 key={element.id}
                 className="border-b border-gray-200 text-center odd:bg-white even:bg-gray-50 dark:border-gray-700 odd:dark:bg-gray-900 even:dark:bg-gray-800"
               >
-                <td className="px-6 py-4">{element.transactor}</td>
-                <td className="px-6 py-4">{element.documento}</td>
-                <td className="cursor-pointer px-6 py-4">{element.tipo_documento.abreviatura}</td>
-                <td className="px-6 py-4">{element.numero_tarjeta}</td>
-                <td className="px-6 py-4">{element.fecha_vencimiento_tarjeta}</td>
-                <td className="px-6 py-4">{element.codigo_seguridad_tarjeta}</td>
-                <td className="px-6 py-4">{element.monto}</td>
-                <td className="cursor-pointer px-6 py-4">{element.divisa.abreviatura}</td>
-                <td className="px-6 py-4">{element.descripcion}</td>
+                <td className="px-5 py-4">{element.transactor}</td>
+                <td className="px-5 py-4">{element.documento}</td>
+                <td className="cursor-pointer px-5 py-4">{element.tipo_documento.abreviatura}</td>
+                <td className="px-5 py-4">{element.numero_tarjeta}</td>
+                <td className="px-5 py-4">{element.fecha_vencimiento_tarjeta}</td>
+                <td className="px-5 py-4">{element.codigo_seguridad_tarjeta}</td>
+                <td className="px-5 py-4">{element.monto}</td>
+                <td className="cursor-pointer px-5 py-4">{element.divisa.abreviatura}</td>
+                <td className="px-5 py-4 text-xs">{element.descripcion}</td>
                 {records.length > 0 && (
-                  <td className="px-6 py-4">
-                    <div className="flex h-full w-full items-center justify-center gap-2">
+                  <td className="px-5 py-4">
+                    <div className="flex items-center justify-center gap-2">
                       <FaPen
                         className="cursor-pointer text-icons duration-300 hover:text-accent3"
                         onClick={() => onEdit(element)}
@@ -85,8 +89,8 @@ export const TableFacturas: FC<TableFacturasProps> = ({ headers, records }) => {
               </tr>
             ))
           ) : (
-            <tr className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 justify-center">
-              <td className="text-center">
+            <tr>
+              <td colSpan={headers.length} className="px-6 py-8 text-center">
                 Ninguna transaccion encontrada hasta el momento. Limpia el buscador o dale al boton
                 de + para agregar nuevas transacciones a la lista .
               </td>
