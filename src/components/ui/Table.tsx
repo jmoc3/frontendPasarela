@@ -35,13 +35,13 @@ export const TableFacturas: FC<TableFacturasProps> = ({ headers, records }) => {
   return (
     <div className="relative h-[50vh] overflow-x-auto shadow-md sm:rounded-lg dark:bg-gray-700">
       <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
-        <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+        <thead className="bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-400">
           <tr className="text-center">
             {headers.map((element, index) => (
               <th
                 key={index}
                 scope="col"
-                className={`px-6 py-3 ${element == 'Fecha de vencimiento de tarjeta' && 'w-[10rem]'} ${element == 'Codigo de seguridad de tarjeta' && 'w-[10rem]'} ${element == 'Monto' && 'w-[10rem]'} ${element == 'Descripcion' && 'w-[15rem]'}`}
+                className={`px-6 py-3 ${element == 'Fecha de vencimiento' && 'w-[10rem]'} ${element == 'Codigo de seguridad' && 'w-[10rem]'} ${element == 'Monto' && 'w-[10rem]'} ${element == 'Descripcion' && 'w-[15rem]'}`}
               >
                 {element}
               </th>
