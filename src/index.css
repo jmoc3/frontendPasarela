@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Reglas CSS para <body> */
+body {
+  font-family: 'DM Sans', sans-serif;
+  user-select: none;
+}
+
+/* Estilos globales light mode*/
+:root {
+  --alpha: transparent; /* transparente */
+  --bg-ppal: #f7f7f7; /* background principal */
+  --bg-sec: #ffffff; /* background secundario */
+  --accent1: #5036f6; /* Color del logo 1*/
+  --accent2: #e937b1; /* Color del logo 2 */
+  --accent3: #7b3aec; /* Color medio del logo */
+  --titles: #1e1a30; /* Títulos */
+  --pg: #5e5e5e; /* Párrafos */
+  --icons: #999999; /* íconos */
+  --shadow: rgba(30, 26, 48, 0.1); /* Sombras sobre fondo blanco */
+  --line: #e6e6e6; /* líneas separadoras */
+}
