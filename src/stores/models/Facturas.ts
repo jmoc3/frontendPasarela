@@ -41,7 +41,7 @@ export const useFacturasStore = create<State & Actions>()((set, get) => ({
     if (res.code == 500) {
       const { setOpenErrorModal } = useAppStore.getState()
       setOpenErrorModal(true)
-      console.error('Error storing factura:', res.message)
+      console.error('Error fetching factura:', res.message)
       return
     }
     set({ facturas: res.data })

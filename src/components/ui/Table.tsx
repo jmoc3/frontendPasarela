@@ -27,9 +27,9 @@ export const TableFacturas: FC<TableFacturasProps> = ({ headers, records }) => {
     if (loading.value == true) {
       return
     }
-    setLoading({ value: true, id })
+    setLoading({ value: true, id, type: 'delete' })
     await deleteFactura(id)
-    setLoading({ value: false, id })
+    setLoading({ value: false, id, type: 'delete' })
   }
 
   return (
@@ -45,44 +45,51 @@ export const TableFacturas: FC<TableFacturasProps> = ({ headers, records }) => {
           </tr>
         </thead>
         <tbody>
-          {records.map((element) => (
-            <tr
-              key={element.id}
-              className="border-b border-gray-200 text-center odd:bg-white even:bg-gray-50 dark:border-gray-700 odd:dark:bg-gray-900 even:dark:bg-gray-800"
-            >
-              <td className="px-6 py-4">{element.transactor}</td>
-              <td className="px-6 py-4">{element.documento}</td>
-              <td className="cursor-pointer px-6 py-4">{element.tipo_documento.abreviatura}</td>
-              <td className="px-6 py-4">{element.numero_tarjeta}</td>
-              <td className="px-6 py-4">{element.fecha_vencimiento_tarjeta}</td>
-              <td className="px-6 py-4">{element.codigo_seguridad_tarjeta}</td>
-              <td className="px-6 py-4">{element.monto}</td>
-              <td className="cursor-pointer px-6 py-4">{element.divisa.abreviatura}</td>
-              <td className="px-6 py-4">{element.descripcion}</td>
-              {records.length > 0 && (
-                <td className="px-6 py-4">
-                  <div className="flex h-full w-full items-center justify-center gap-2">
-                    <FaPen
-                      className="cursor-pointer text-icons duration-300 hover:text-accent3"
-                      onClick={() => onEdit(element)}
-                    />
-                    {loading.value && loading.id == element.id ? (
-                      <Loading
-                        svgClasses="!w-[1rem] !h-[1rem] group-hover:text-white group-hover:fill-accent3 duration-300 "
-                        color="white"
-                        bgColor="accent3"
+          {records.length > 0 ? (
+            records.map((element) => (
+              <tr
+                key={element.id}
+                className="border-b border-gray-200 text-center odd:bg-white even:bg-gray-50 dark:border-gray-700 odd:dark:bg-gray-900 even:dark:bg-gray-800"
+              >
+                <td className="px-6 py-4">{element.transactor}</td>
+                <td className="px-6 py-4">{element.documento}</td>
+                <td className="cursor-pointer px-6 py-4">{element.tipo_documento.abreviatura}</td>
+                <td className="px-6 py-4">{element.numero_tarjeta}</td>
+                <td className="px-6 py-4">{element.fecha_vencimiento_tarjeta}</td>
+                <td className="px-6 py-4">{element.codigo_seguridad_tarjeta}</td>
+                <td className="px-6 py-4">{element.monto}</td>
+                <td className="cursor-pointer px-6 py-4">{element.divisa.abreviatura}</td>
+                <td className="px-6 py-4">{element.descripcion}</td>
+                {records.length > 0 && (
+                  <td className="px-6 py-4">
+                    <div className="flex h-full w-full items-center justify-center gap-2">
+                      <FaPen
+                        className="cursor-pointer text-icons duration-300 hover:text-accent3"
+                        onClick={() => onEdit(element)}
                       />
-                    ) : (
-                      <FaRegTrashAlt
-                        className="cursor-pointer text-icons duration-300 hover:text-accent2"
-                        onClick={() => onDelete(element.id)}
-                      />
-                    )}
-                  </div>
-                </td>
-              )}
-            </tr>
-          ))}
+                      {loading.value && loading.id == element.id && loading.type == 'delete' ? (
+                        <Loading
+                          svgClasses="!w-[1rem] !h-[1rem] group-hover:text-white group-hover:fill-accent3 duration-300 "
+                          color="white"
+                          bgColor="accent3"
+                        />
+                      ) : (
+                        <FaRegTrashAlt
+                          className="cursor-pointer text-icons duration-300 hover:text-accent2"
+                          onClick={() => onDelete(element.id)}
+                        />
+                      )}
+                    </div>
+                  </td>
+                )}
+              </tr>
+            ))
+          ) : (
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 justify-center">
+              Sin ninguna tranasccion registrada hasta el momento. Presionar en el boton de + alado
+              del buscador.
+            </div>
+          )}
         </tbody>
       </table>
     </div>

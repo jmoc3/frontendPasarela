@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from 'react'
 import { useAppStore } from '@/stores/appStore'
 import { Input } from '@/components/ui/formui/Input'
-import { useForm } from 'react-hook-form'
 import { TableFacturas } from '@/components/ui/Table'
 import { FaPlusSquare } from 'react-icons/fa'
 import { FormNewTransaction } from '@/components/homePage/FormNewTransaction'
 import { useFacturasStore } from '@/stores/models/Facturas'
 import { normalizeText } from '@/helpers/strings'
+import { useTiposDocumentosStore } from '@/stores/models/TiposDocumentos'
+import { useDivisaStore } from '@/stores/models/Divisas'
 
 export const HomePage: FC = () => {
   const { setMode, switchShowModalNew } = useAppStore()
@@ -15,6 +16,8 @@ export const HomePage: FC = () => {
     switchShowModalNew(true)
   }
   const { facturas, fetchFacturas } = useFacturasStore()
+  const { fetchTiposDocumentos } = useTiposDocumentosStore()
+  const { fetchDivisas } = useDivisaStore()
 
   const [searchValue, setSearchValue] = useState<string>('')
 
@@ -33,6 +36,8 @@ export const HomePage: FC = () => {
 
   useEffect(() => {
     fetchFacturas()
+    fetchTiposDocumentos()
+    fetchDivisas()
   }, [])
 
   return (

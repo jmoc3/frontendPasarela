@@ -51,9 +51,9 @@ export const SignUp: FC = () => {
   const { loading, setLoading } = useAppStore()
 
   const onSubmit = async (data: UserType) => {
-    setLoading({ value: true })
+    setLoading({ value: true, type: 'signUp' })
     await signUp(data, navigate)
-    setLoading({ value: false })
+    setLoading({ value: false, type: 'signUp' })
     reset()
   }
 
@@ -151,7 +151,7 @@ export const SignUp: FC = () => {
           </div>
         </div>
         <div className="flex items-center justify-center gap-x-6 text-sm">
-          {loading.value ? (
+          {loading.value && loading.type == 'signUp' ? (
             <Loading
               svgClasses="!w-[1rem] !h-[1rem] group-hover:text-white group-hover:fill-accent3 duration-300 "
               color="white"

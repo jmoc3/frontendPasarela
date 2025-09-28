@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 type ModalData = { title: string; message: string }
 
-type LoadingType = { value: boolean; id?: number }
+type LoadingType = { value: boolean; id?: number; type: string }
 
 type State = {
   mode: string
@@ -36,7 +36,7 @@ export const useAppStore = create<State & Actions>()((set, get) => ({
     message:
       'Algo ocurrio usando la base de datos, por favor reiniciar la pagina o reintentar mas tarde',
   },
-  loading: { value: false, id: 0 },
+  loading: { value: false, id: 0, type: '' },
   showModal: false,
   openErrorModal: false,
   openSucessModal: false,

@@ -7,7 +7,7 @@ type UserType = {
 type FacturaType = {
   id: number
   divisa_id: number
-  divisa: DividaType
+  divisa: DivisaType
   monto: number | ''
   descripcion: string
   transactor: string
@@ -25,10 +25,10 @@ type TipoDocumentoType = {
   abreviatura: string
 }
 
-type DividaType = {
+type DivisaType = {
   id: number
   nombre: string
   abreviatura: string
 }
 
-export type { UserType, FacturaType }
+export type { UserType, FacturaType, DivisaType, TipoDocumentoType }

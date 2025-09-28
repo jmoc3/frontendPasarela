@@ -11,6 +11,8 @@ import { Loading } from '@/components/ui/Loading'
 import { FaCircleXmark } from 'react-icons/fa6'
 import { FacturaType } from '@/types/modelTypes'
 import { useFacturasStore } from '@/stores/models/Facturas'
+import { useDivisaStore } from '@/stores/models/Divisas'
+import { useTiposDocumentosStore } from '@/stores/models/TiposDocumentos'
 
 type FormType = Omit<FacturaType, 'id'>
 
@@ -66,6 +68,8 @@ const formNewBranchRules = {
 
 export const FormNewTransaction: FC = () => {
   const { mode, loading, showModal, setMode, switchShowModalNew, setLoading } = useAppStore()
+  const { tiposDocumentos } = useTiposDocumentosStore()
+  const { divisas } = useDivisaStore()
   const { inputModel, resetInputModel, storeFactura, updateFactura } = useFacturasStore()
 
   const {
@@ -76,14 +80,14 @@ export const FormNewTransaction: FC = () => {
   } = useForm<FormType>()
 
   const onSubmit: SubmitHandler<FormType> = async (data) => {
-    setLoading({ value: true, id: 0 })
+    setLoading({ value: true, id: 0, type: 'formSubmit' })
     if (mode == 'creacion') {
       await storeFactura(data)
     } else {
       await updateFactura(inputModel.id, data)
     }
     onCancel()
-    setLoading({ value: false, id: 0 })
+    setLoading({ value: false, id: 0, type: 'formSubmit' })
   }
 
   const onCancel = () => {
@@ -152,10 +156,7 @@ export const FormNewTransaction: FC = () => {
                       name="tipo_documento_id"
                       register={register}
                       formRules={formNewBranchRules}
-                      selectOptions={[
-                        { id: 1, nombre: 'CC' },
-                        { id: 2, nombre: 'PA' },
-                      ]}
+                      selectOptions={tiposDocumentos}
                     />
                   </div>
                 </label>
@@ -240,10 +241,7 @@ export const FormNewTransaction: FC = () => {
                     name="divisa_id"
                     register={register}
                     formRules={formNewBranchRules}
-                    selectOptions={[
-                      { id: 1, nombre: 'COP' },
-                      { id: 2, nombre: 'USD' },
-                    ]}
+                    selectOptions={divisas}
                   />
                 </div>
               </label>
@@ -272,7 +270,7 @@ export const FormNewTransaction: FC = () => {
               type="submit"
               className="group flex w-[4rem] cursor-pointer items-center justify-center rounded border border-accent1 bg-sec px-2 py-1 text-center text-accent1 duration-300 hover:bg-accent1 hover:text-sec focus:outline-none"
             >
-              {loading.value ? (
+              {loading.value && loading.type == 'formSubmit' ? (
                 <Loading
                   svgClasses="!w-[1rem] !h-[1rem] group-hover:text-white group-hover:fill-accent3 duration-300 "
                   color="white"

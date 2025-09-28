@@ -11,9 +11,9 @@ export const HeaderComponent: FC<HeaderComponentProps> = ({ ...props }) => {
   const { loading, setLoading } = useAppStore()
 
   const logoutSession = async () => {
-    setLoading({ value: true })
+    setLoading({ value: true, type: 'logout' })
     await logout()
-    setLoading({ value: false })
+    setLoading({ value: false, type: 'logout' })
   }
   return (
     <div
@@ -22,7 +22,7 @@ export const HeaderComponent: FC<HeaderComponentProps> = ({ ...props }) => {
       <img className="w-32 rounded" src="\crosspay-solutions-logo-color.svg" alt="" />
       {isAuthenticated && (
         <div>
-          {loading.value ? (
+          {loading.value && loading.type == 'logout' ? (
             <Loading
               svgClasses="!w-[1rem] !h-[1rem] group-hover:text-white group-hover:fill-accent3 duration-300 "
               color="white"
