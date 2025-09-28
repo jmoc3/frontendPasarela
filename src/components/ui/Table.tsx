@@ -85,10 +85,12 @@ export const TableFacturas: FC<TableFacturasProps> = ({ headers, records }) => {
               </tr>
             ))
           ) : (
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 justify-center">
-              Sin ninguna tranasccion registrada hasta el momento. Presionar en el boton de + alado
-              del buscador.
-            </div>
+            <tr className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 justify-center">
+              <td className="text-center">
+                Ninguna transaccion encontrada hasta el momento. Limpia el buscador o dale al boton
+                de + para agregar nuevas transacciones a la lista .
+              </td>
+            </tr>
           )}
         </tbody>
       </table>
